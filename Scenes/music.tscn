@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bon7wyrk8gp5n"]
+
+[ext_resource type="AudioStream" uid="uid://b30rgq0bllu0s" path="res://Assets/SFX/MajulaTheme.mp3" id="1_xs6l0"]
+
+[node name="Music" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_xs6l0")
+autoplay = true
+bus = &"Music"

@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://b4jwg5r6yo8gw"]
+
+[ext_resource type="Texture2D" uid="uid://c5gioufbhxfdb" path="res://Assets/PixelAdventure1/slime_enemy1.png" id="1_5y754"]
+[ext_resource type="Script" path="res://Scenes/slime.gd" id="1_fu3so"]
+[ext_resource type="Texture2D" uid="uid://dnmxiyrpksaqe" path="res://Assets/PixelAdventure1/slime_enemy2.png" id="2_fuhxx"]
+[ext_resource type="Texture2D" uid="uid://6oqfe3pt2ycj" path="res://Assets/PixelAdventure1/slime_enemy3.png" id="3_4kjpp"]
+[ext_resource type="Texture2D" uid="uid://dr343621rr343" path="res://Assets/PixelAdventure1/slime_enemy4.png" id="4_ax28f"]
+[ext_resource type="PackedScene" uid="uid://cs0ad5m7hiaid" path="res://Scenes/killzone.tscn" id="5_6sc1y"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wuh7f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5y754")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fuhxx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4kjpp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ax28f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d3w18"]
+radius = 7.0
+
+[node name="Slime" type="Node2D"]
+script = ExtResource("1_fu3so")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_wuh7f")
+autoplay = "default"
+frame_progress = 0.856581
+
+[node name="Killzone" parent="." instance=ExtResource("5_6sc1y")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_d3w18")
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, 3)
+target_position = Vector2(9, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, 3)
+target_position = Vector2(-10, 0)
+
+[connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
